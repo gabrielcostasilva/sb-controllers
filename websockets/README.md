@@ -5,7 +5,7 @@ WebSocket is an [HTTP-compatible protocol](https://docs.spring.io/spring-framewo
 
 It features two-way message communication between client and server. Thus, WebSocket is intended for real-time applications.
 
-In contrast with REST that has several endpoints, a WebSocket usually has only a single endpoint for establishing the connection. Another difference is that WebSocket requires another protocol (on top of itself) to set content, format and type of exchanged messages. In this project, [STOMP](https://stomp.github.io/stomp-specification-1.2.html#Abstract) is used.
+In contrast with REST that has several endpoints, a WebSocket usually has only a single endpoint for establishing the connection, which is kept open until the client or the server decides to close it. Another difference is that WebSocket requires another protocol (on top of itself) to set content, format and type of exchanged messages. In this project, [STOMP](https://stomp.github.io/stomp-specification-1.2.html#Abstract) is used.
 
 ## Project Overview
 The `WebSocketController` class sets the endpoint to connect client and server. The controller receives a `GreetingRequest` and returns a `GreetingResponse` through the `greet()` method. If something goes wrong, the `handleException()` method is invoked.
@@ -50,7 +50,7 @@ public class GreetingWebsocketConfiguration implements WebSocketMessageBrokerCon
 1. Identifies this as a configuration class.
 2. Identifies the class as a message broker.
 3. Inherits common methods for message broker classes.
-4. Sets the subscription topic. Messages with `/topic` headers as routed to the broker.
+4. Sets an in-memmory subscription topic. Messages with `/topic` headers as routed to the broker.
 5. Sets the destination header (`/app`) to
 `@MessageMapping` methods in the controller.
 6. Sets the HTTP server endpoint. It uses SockJS, which enables WebSock emulation when there are impediments for WebSocket interations.
@@ -58,3 +58,9 @@ public class GreetingWebsocketConfiguration implements WebSocketMessageBrokerCon
 To try out, the [`/resources/static/index.html`](./src/main/resources/static/index.html) file uses JavaScript with SockJS and STOMP libraries to connect to the server and exchange messages & simulate exception.
 
 Finally, `spring-boot-starter-websocket` is required to enable Spring Boot WebSocket features.
+
+## Further Reference
+
+- [Spring guide](https://spring.io/guides/gs/messaging-stomp-websocket/) - Simple get started.
+- [Intro to WebSock with Spring](https://www.baeldung.com/websockets-spring) - More JS examples.
+- [Using Spring Boot for WebSocket Implementation with STOMP](https://www.toptal.com/java/stomp-spring-boot-websocket) - More complete.
