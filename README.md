@@ -4,5 +4,5 @@ Projects in this repo are mainly based on [Josh Long's series on Spring @Control
 ## Overview of Projects
 Each folder groups a single example as follows:
 
-- [_websockets_](./websockets/) ...
+- [_websockets_](./websockets/) exemplifies how WebSocket can enable two-way communication in real-time applications.
 
