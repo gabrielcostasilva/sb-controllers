@@ -64,3 +64,4 @@ Finally, `spring-boot-starter-websocket` is required to enable Spring Boot WebSo
 - [Spring guide](https://spring.io/guides/gs/messaging-stomp-websocket/) - Simple get started.
 - [Intro to WebSock with Spring](https://www.baeldung.com/websockets-spring) - More JS examples.
 - [Using Spring Boot for WebSocket Implementation with STOMP](https://www.toptal.com/java/stomp-spring-boot-websocket) - More complete.
+- [Reactive WebSocket](https://github.com/gabrielcostasilva/reactivity-examples/tree/main/websockets-reactive)
