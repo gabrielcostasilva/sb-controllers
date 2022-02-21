@@ -6,3 +6,5 @@ Each folder groups a single example as follows:
 
 - [_websockets_](./websockets/) exemplifies how WebSocket can enable two-way communication in real-time applications.
 
+- [_rsocket_](./rsocket/) shows a RSocket implementation for request-response and request-stream interactions.
+
