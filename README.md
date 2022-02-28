@@ -8,3 +8,5 @@ Each folder groups a single example as follows:
 
 - [_rsocket_](./rsocket/) shows a RSocket implementation for request-response and request-stream interactions.
 
+- [_graphql_](./graphql/) introduces the Spring support for GraphQL.
+
