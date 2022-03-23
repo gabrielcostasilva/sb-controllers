@@ -10,3 +10,5 @@ Each folder groups a single example as follows:
 
 - [_graphql_](./graphql/) introduces the Spring support for GraphQL.
 
+- [_mvc_](./mvc/) uses traditional MVC model-2 architecture and error handling with Spring MVC.
+
