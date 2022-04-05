@@ -12,3 +12,4 @@ Each folder groups a single example as follows:
 
 - [_mvc_](./mvc/) uses traditional MVC model-2 architecture and error handling with Spring MVC.
 
+- [_rest_](./rest/) features a REST implementation of _Hello World_.
