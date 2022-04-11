@@ -1,51 +1,15 @@
 # MVC Example
-This project is based on [Josh Long's short review of Spring MVC](https://www.youtube.com/watch?v=hUBrFekxn0Y).
-
-The main difference in this project is that we use [Apache Freemarker](https://freemarker.apache.org) instead of Thymeleaf.
+This project is based on [Josh Long's short review of Spring REST](https://www.youtube.com/watch?v=V9KVOHkcxPo).
 
 ## Project Overview
-This project consists of a single [webpage](./src/main/resources/templates/index.ftl) that uses Freemarker template engine constructs to render dynamic data. The [MVCController](./src/main/java/com/example/mvc/MVCController.java) maps URL requests and methods that represent the expected behaviour - like retrieving a webpage. In addition, [MVCExceptionHandler](./src/main/java/com/example/mvc/MVCExceptionHandler.java) is used to concentrate error handling in one single place.
+This project is a REST version of the [MVC project](../mvc/). Instead of webpages receiving and delivering content, we have REST requests and responses. This feature is essential for integrating systems.
 
-The sequence diagram below shows a simplistic overview of a typical success case.
+Differences start with the `@Controller` annotation. As the [official documentation](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RestController.html) points out, `org.springframework.web.bind.annotation.RestController` is a convenience annotation for `@Controller` and `@ResponseBody`. 
 
-> Please notice that the goal is not to be technically accurate, but to give an idea of the overall process. There are many more things happening here, like the template engine and the Spring Framework interactions.
+Another difference is the method return type. `org.springframework.http.ResponseEntity` is a wrapper object that carries headers, response type, data and other information usually returned in a REST response. The object provides convenience methods to simplify the response construction.
 
-```mermaid
-sequenceDiagram
-	actor User
-    User->>WebServer: request(/)
-	activate WebServer
-	WebServer->>MVCController: request(/)
-	activate MVCController
-	MVCController->>index.ftl: retrieve & fill data
-	MVCController->>WebServer: index.html
-	deactivate MVCController
-	WebServer->>User: index.html
-```
+This difference also impacts the return construction. Whereas the MVC version returned the template name, the REST version returns the `ResponseEntity` object with its data.
 
-The `MVCController` class is annotated with `org.springframework.stereotype.Controller`, representing a controller in the MVC pattern. The snippet below shows the class methods.
+Finally, the data injestion also changes. In this example, a variable (_name_) is sent as part of the application path. That is captured by the following code: `@PostMapping("/{name}")`. The method captures the variable value by setting a parameter `String name` annotated with `org.springframework.web.bind.annotation.PathVariable`.
 
-```java
-@GetMapping("/")
-public String init() {
-	return "/index";
-}
-
-@PostMapping("/")
-public String init(@RequestParam String name, Model model) {
-	
-	if (Character.isLowerCase(name.charAt(0))) {
-		throw new RuntimeException("A name must start with a capital letter");
-	}
-
-	model.addAttribute("username", name);
-
-	return "/index";
-}
-```
-
-`org.springframework.web.bind.annotation.GetMapping` and `org.springframework.web.bind.annotation.PostMapping` map the URL and the HTTP method with a particular Java method. Notice the method overload. Whereas the first method has no parameter, the second has two parameters. 
-
-The second method waits a parameter `name` from the webpage form. It also add a value to the `org.springframework.ui.Model` object. This object is injected by the framework and the webpage uses it to render the name previously informed.
-
-In case of an exception, the `MVCExceptionHandler` class is activated. The annotation `org.springframework.web.bind.annotation.ControllerAdvice` is responsible for that. The method `handleException` handles the exception. 
+One thing interesting here is that the exception handler changed very little. The only change necessary is the method return. Notice the reponse wrappers the exception: `ResponseEntity.badRequest().body(e.getMessage())`.

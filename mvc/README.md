@@ -49,3 +49,7 @@ public String init(@RequestParam String name, Model model) {
 The second method waits a parameter `name` from the webpage form. It also add a value to the `org.springframework.ui.Model` object. This object is injected by the framework and the webpage uses it to render the name previously informed.
 
 In case of an exception, the `MVCExceptionHandler` class is activated. The annotation `org.springframework.web.bind.annotation.ControllerAdvice` is responsible for that. The method `handleException` handles the exception. 
+
+## Further Reference
+- [Serving Web content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
+- [Validating form input](https://spring.io/guides/gs/validating-form-input/)
